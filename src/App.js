@@ -37,7 +37,9 @@ class App extends Component {
     );
   }
 }
+
 const mapStateToProps = null;
 const mapDispatchToProps = dispatch =>
   bindActionCreators(actionCreators, dispatch);
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);
