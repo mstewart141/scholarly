@@ -1,4 +1,4 @@
-const { COGNITIVE_API_KEY } = '../../secrets/secrets';
+import { COGNITIVE_API_KEY } from '../secrets/secrets';
 
 const BASE_URL = 'https://westus.api.cognitive.microsoft.com/academic/v1.0/';
 
@@ -6,6 +6,15 @@ const header = {
   headers: new Headers({
     'Ocp-Apim-Subscription-Key': `${COGNITIVE_API_KEY}`
   })
+};
+
+const makeCall = uri => {
+  const request = new Request(uri, header);
+
+  return fetch(request).then(res => res.json()).then(res => {
+    console.log(res);
+    return res;
+  });
 };
 
 /* INTERPRET :: https://westus.dev.cognitive.microsoft.com/docs/services/56332331778daf02acc0a50b/operations/56332331778daf06340c9666
@@ -21,9 +30,7 @@ export const interpret = query => {
   const endpoint = 'interpret?query=';
   const uri = `${BASE_URL + endpoint + query}`;
 
-  const request = new Request(uri, header);
-
-  fetch(request).then(res => res.json()).then(console.log);
+  return makeCall(uri);
 };
 
 /* EVALUATE :: https://westus.dev.cognitive.microsoft.com/docs/services/56332331778daf02acc0a50b/operations/565d753be597ed16ac3ffc03
@@ -34,15 +41,12 @@ export const interpret = query => {
  * orderby    (optional) string | Name of an attribute that is used for sorting the entities. Optionally, ascending/descending can be specified. The format is: name:asc or name:desc.
  * attributes (optional) string | A comma delimited list that specifies the attribute values that are included in the response. Attribute names are case-sensitive.
 * */
-export const evaluate = expr => {
+export const evaluate = (expr, attributes = ['Id', 'Ti']) => {
   // [?query][&complete][&count][&offset][&timeout][&model]'
+  const attrStr = attributes.reduce((a, b) => `${a},${b}`, 'Id');
+
   const endpoint = 'evaluate?expr=';
-  const uri = `${BASE_URL + endpoint + expr}`;
+  const uri = `${BASE_URL + endpoint + expr}&attributes=${attrStr}`;
 
-  const request = new Request(uri, header);
-
-  fetch(request).then(res => res.json()).then(console.log);
+  return makeCall(uri);
 };
-
-export const ok = () => 7;
-export const ok2 = () => 7;
