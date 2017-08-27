@@ -1,39 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import './App.css';
 import * as actionCreators from './reducers/actionCreators';
-import Temp from './components/Temp';
+import ArticleList from './components/ArticleList';
+import ArticlePreview from './components/ArticlePreview';
+import Search from './components/Search';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  max-width: 80%;
+  margin: auto;
+  padding-top: 10em;
+`;
+
+const Subcontainer = styled.div`display: flex;`;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { person: { name: 'whale' } };
-  }
-
-  componentDidMount() {
-    this.getLuke();
-  }
-
-  getLuke() {
-    fetch('https://swapi.co/api/people/1')
-      .then(resp => resp.json())
-      .then(res => this.setState({ person: res }));
-  }
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div>
-          this is a div {JSON.stringify(this.state.person.name)}
-        </div>
-        <Temp lol={this.props.lol} />
-      </div>
+      <Container>
+        <Search />
+        <Subcontainer>
+          <ArticleList />
+          <ArticlePreview />
+        </Subcontainer>
+      </Container>
     );
   }
 }
