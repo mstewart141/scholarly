@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ArticleListItem from './ArticleListItem';
 
 const Container = styled.div`
   flex-grow: 1;
@@ -9,7 +10,9 @@ const Container = styled.div`
 
 const ArticleList = ({ articles }) =>
   <Container>
-    {articles}
+    {articles.map(article => <ArticleListItem {...article} />)}
   </Container>;
+
+ArticleList.defaultProps = { articles: [] };
 
 export default ArticleList;
