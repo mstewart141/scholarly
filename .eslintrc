@@ -21,7 +21,8 @@
     "import/no-unresolved": 0,
     "import/extensions": 0,
     "comma-dangle": ["error", "only-multiline"],
-    "no-console": 0
+    "no-console": 0,
+    "react/prop-types": 1
   },
   "parserOptions": {
     "ecmaVersion": 2016,

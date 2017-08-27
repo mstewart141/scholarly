@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Temp from './components/Temp';
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class App extends Component {
         <div>
           this is a div {JSON.stringify(this.state.person.name)}
         </div>
+        <Temp />
       </div>
     );
   }

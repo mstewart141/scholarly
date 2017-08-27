@@ -5,14 +5,14 @@ import {
   LOL
 } from './actionCreators';
 
-const defaultState = [];
+const defaultState = { cat: 7 };
 
-const rootReducer = function rootReducerKappa(state = defaultState, action) {
+const rootReducer = (state = defaultState, action) => {
   // console.log('REDUCER FIRING');
   switch (action.type) {
     case LOL:
       console.log('yup lololol switched');
-      return state;
+      return { ...state, cat: 5 };
     // case NOTIFY_OF_API_REQUEST:
     //   // should also change the inFlight stuff eventually
     //   return [...state];
