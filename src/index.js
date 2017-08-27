@@ -1,27 +1,27 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-// import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import store from './store/store';
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import "./index.css";
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
+import store from "./store/store";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+const Todo = () =>
+  <div>
+    <h2>Todo</h2>
+    <Link to={"/app"}>App</Link>
+  </div>;
 
 render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <div>
+        <Route path="/app" component={App} />
+        <Route path="/" component={Todo} />
+      </div>
+    </Router>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 registerServiceWorker();
-
-// render(
-//   <Provider store={store}>
-//     <Router history={browserHistory}>
-//       <Route path="/" component={App}>
-//         <IndexRoute component={MainContainer} />
-//       </Route>
-//     </Router>
-//   </Provider>,
-//   mount
-// );
