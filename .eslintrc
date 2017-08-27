@@ -11,7 +11,7 @@
   "rules": {
     "prettier/prettier": ["error", {
       "singleQuote": true,
-      "trailingComma": "es6",
+      "trailingComma": "none",
       "semi": true,
       "jsxBracketSameLine": true,
       "parser": "babylon"
@@ -19,7 +19,9 @@
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
     "import/no-unresolved": 0,
-    "import/extensions": 0
+    "import/extensions": 0,
+    "comma-dangle": ["error", "only-multiline"],
+    "no-console": 0
   },
   "parserOptions": {
     "ecmaVersion": 2016,
