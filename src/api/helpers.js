@@ -8,20 +8,21 @@ import { COGNITIVE_API_KEY } from '../../secrets/secrets';
  * timeout  (optional) number  | Timeout in milliseconds. Only interpretations found before the timeout has elapsed are returned.
  * model    (optional) string  | Name of the model that you wish to query. Currently, the value defaults to "latest".
 * */
-export var interpretOk = (query /* , complete, count, offset, timeout */) => {
+const interpretOk = (query /* , complete, count, offset, timeout */) => {
   // [?query][&complete][&count][&offset][&timeout][&model]'
   const BASE =
-    'https://westus.api.cognitive.microsoft.com/academic/v1.0/interpret?';
+    'https://westus.api.cognitive.microsoft.com/academic/v1.0/interpret?query=';
 
   const uri = `${BASE}${query}`;
 
   const request = new Request(uri, {
     headers: new Headers({
-      'Ocp-Apim-Subscription-Key': `{${COGNITIVE_API_KEY}}`
+      'Ocp-Apim-Subscription-Key': `${COGNITIVE_API_KEY}`
     })
   });
 
-  fetch(request).then(res => res).then(console.log);
+  fetch(request).then(res => res.json()).then(console.log);
 };
 
 export const ok = () => 7;
+export const ok2 = () => 7;
