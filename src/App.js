@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './App.css';
+import * as actionCreators from './reducers/actionCreators';
 import Temp from './components/Temp';
 
 class App extends Component {
@@ -30,12 +32,12 @@ class App extends Component {
         <div>
           this is a div {JSON.stringify(this.state.person.name)}
         </div>
-        <Temp />
+        <Temp lol={this.props.lol} />
       </div>
     );
   }
 }
-
 const mapStateToProps = null;
-const mapDispatchToProps = null;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(actionCreators, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(App);

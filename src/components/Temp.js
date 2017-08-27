@@ -1,7 +1,6 @@
 import React from 'react';
-import { lol } from '../reducers/actionCreators';
 
-const Temp = () =>
+const Temp = ({ lol }) =>
   <div>
     <div> hello </div>
     <button
