@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import Temp from './components/Temp';
 
@@ -35,4 +36,6 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = null;
+const mapDispatchToProps = null;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
