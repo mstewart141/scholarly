@@ -7,18 +7,11 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store/store';
 
-const Todo = () =>
-  <div>
-    <h2>Todo</h2>
-    <Link to={'/app'}>App</Link>
-  </div>;
-
 render(
   <Provider store={store}>
     <Router>
       <div>
-        <Route path="/" component={Todo} />
-        <Route path="/app" component={App} />
+        <Route path="/" component={App} />
       </div>
     </Router>
   </Provider>,
