@@ -3,7 +3,7 @@ import {
   // FETCH_FROM_API_AFTER_REQUEST,
   // GRAB_RESOLVED_API_RESP_PAYLOAD,
   LOL
-} from './actioncreators';
+} from './actionCreators';
 
 const defaultState = [];
 
