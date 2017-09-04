@@ -11,10 +11,12 @@ const header = {
 const makeCall = uri => {
   const request = new Request(uri, header);
 
-  return fetch(request).then(res => res.json()).then(res => {
-    console.log(res);
-    return res;
-  });
+  return fetch(request)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      return res;
+    });
 };
 
 /* INTERPRET :: https://westus.dev.cognitive.microsoft.com/docs/services/56332331778daf02acc0a50b/operations/56332331778daf06340c9666
