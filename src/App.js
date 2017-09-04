@@ -19,7 +19,7 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <Search />
+        <Search executeQuery={this.props.resolveEvaluateQuery}/>
         <Subcontainer>
           <ArticleList />
           <ArticlePreview />
