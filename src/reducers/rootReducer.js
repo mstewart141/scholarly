@@ -3,10 +3,11 @@ import {
   // FETCH_FROM_API_AFTER_REQUEST,
   // GRAB_RESOLVED_API_RESP_PAYLOAD,
   LOL,
-  RESOLVE_EVALUATE_QUERY
+  EVALUATE_SUCCESS,
+  INTERPRET_SUCCESS
 } from './actionCreators';
 
-const defaultState = { cat: 7, entities: [] };
+const defaultState = { cat: 7, results: [], interpretations: [] };
 
 const rootReducer = (state = defaultState, action) => {
   // console.log('REDUCER FIRING');
@@ -14,8 +15,10 @@ const rootReducer = (state = defaultState, action) => {
     case LOL:
       console.log('yup lololol switched');
       return { ...state, cat: 5 };
-    case RESOLVE_EVALUATE_QUERY:
-      return { ...state, entities: action.entities };
+    case EVALUATE_SUCCESS:
+      return { ...state, results: action.results };
+    case INTERPRET_SUCCESS:
+      return { ...state, results: action.interpretations };
     //   // should also change the inFlight stuff eventually
     //   return [...state];
     // case FETCH_FROM_API_AFTER_REQUEST:

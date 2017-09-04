@@ -1,47 +1,41 @@
-import { evaluate } from '../api/endpoints';
+import { evaluate, interpret } from '../api/endpoints';
 
-export const NOTIFY_OF_API_REQUEST = 'NOTIFY_OF_API_REQUEST';
-export const FETCH_FROM_API_AFTER_REQUEST = 'FETCH_FROM_API_AFTER_REQUEST';
-export const GRAB_RESOLVED_API_RESP_PAYLOAD = 'GRAB_RESOLVED_API_RESP_PAYLOAD';
 export const LOL = 'LOL';
-export const RESOLVE_EVALUATE_QUERY = 'RESOLVE_EVALUATE_QUERY';
+export const EVALUATE_SUCCESS = 'EVALUATE_SUCCESS';
+export const INTERPRET_SUCCESS = 'INTERPRET_SUCCESS';
 
-const notifyOfApiRequest = () => ({
-  type: NOTIFY_OF_API_REQUEST,
-  requestInFlight: true
+const interpretSuccess = interpretations => ({
+  type: INTERPRET_SUCCESS,
+  interpretations
 });
 
-const grabResolvedApiRespPayload = payload => ({
-  type: GRAB_RESOLVED_API_RESP_PAYLOAD,
-  requestInFlight: false,
-  payload
+const evaluateSuccess = results => ({
+  type: EVALUATE_SUCCESS,
+  results
 });
-
-const testlol = 'node.js';
-
-export const fetchFromApiAfterRequest = (
-  searchTarget = testlol
-) => dispatch => {
-  dispatch(notifyOfApiRequest()); // not sure if this should be function or function invokation
-  return fetch(`http://localhost:2500/search?q=${searchTarget}`)
-    .then(response => response.json())
-    .then(response => {
-      dispatch(grabResolvedApiRespPayload(response));
-    })
-    .catch(error => console.log(error));
-};
 
 export const lol = () => ({ type: LOL });
+
+export const getInterpretations = userQuery => dispatch =>
+  interpret(userQuery)
+    .then(({ interpetations }) => interpetations)
+    .then(interpretations => {
+      dispatch(interpretSuccess(interpretations));
+      console.log('dfssdfdf', new Promise((res, rej) => res(interpretations)));
+      return new Promise((res, rej) => res(interpretations)); // value
+    })
+    .catch(error => console.log(error)); // dispatch interpretFailure
 
 export const resolveEvaluateQuery = (
   expr = "Composite(AA.AuN=='jaime teevan')"
 ) => dispatch =>
   evaluate(expr)
     .then(({ entities }) => entities)
-    .then(entities =>
-      dispatch({
-        type: RESOLVE_EVALUATE_QUERY,
-        entities
-      })
-    )
+    .then(results => dispatch(evaluateSuccess(results)))
+    .catch(error => console.log(error)); // dispatch evaluateFailure
+
+export const interpretAndResolve = userQuery =>
+  getInterpretations(userQuery)
+    .then(interpretations => interpretations[0].rules[0].output.value)
+    .then(expr => resolveEvaluateQuery(expr))
     .catch(error => console.log(error));

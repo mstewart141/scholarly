@@ -4,7 +4,12 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../reducers/actionCreators';
 import * as endpoints from '../api/endpoints';
 
-const Temp = ({ lol, resolveEvaluateQuery }) => (
+const Temp = ({
+  lol,
+  getInterpretations,
+  resolveEvaluateQuery,
+  interpretAndResolve
+}) => (
   <div>
     <div> hello </div>
     <div> hello </div>
@@ -13,8 +18,9 @@ const Temp = ({ lol, resolveEvaluateQuery }) => (
     <div> hello </div>
     <div> hello </div>
     <button onClick={lol}>hello</button>
-    <button onClick={() => endpoints.interpret('xgboost')}>interprete</button>
+    <button onClick={() => getInterpretations('xgboost')}>interprete</button>
     <button onClick={() => resolveEvaluateQuery()}>evaluate</button>
+    <button onClick={() => interpretAndResolve('xgboost')}>BOTH</button>
   </div>
 );
 
