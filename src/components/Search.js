@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Input = styled.input`
@@ -8,6 +8,25 @@ const Input = styled.input`
   border: 1px grey solid;
 `;
 
-const Search = ({ onSubmit }) => <Input placeholder="Search" />;
+class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(event) {
+    const query = this.search.value;
+    event.preventDefault();
+    this.props.executeQuery(query);
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.onSubmit}>
+        <Input placeholder="Search" innerRef={(search) => {this.search = search}}/>
+      </form>
+    );
+  }
+}
 
 export default Search;
