@@ -13,15 +13,17 @@ const Container = styled.div`
   padding-top: 10em;
 `;
 
-const Subcontainer = styled.div`display: flex;`;
+const Subcontainer = styled.div`
+  display: flex;
+`;
 
 class App extends Component {
   render() {
     return (
       <Container>
-        <Search executeQuery={this.props.resolveEvaluateQuery}/>
+        <Search executeQuery={this.props.interpretAndResolve}/>
         <Subcontainer>
-          <ArticleList />
+          <ArticleList results={this.props.results}/>
           <ArticlePreview />
         </Subcontainer>
       </Container>
@@ -29,7 +31,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = null;
+const mapStateToProps = state => ({
+  results: state.results,
+});
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(actionCreators, dispatch);
 

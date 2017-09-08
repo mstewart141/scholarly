@@ -15,9 +15,8 @@ class Search extends Component {
   }
 
   onSubmit(event) {
-    const query = this.search.value;
     event.preventDefault();
-    this.props.executeQuery(query);
+    this.props.executeQuery(this.search.value);
   }
 
   render() {

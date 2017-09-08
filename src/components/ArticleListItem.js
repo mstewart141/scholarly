@@ -3,17 +3,20 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
-  border: 1px solid red;
-  height: 10em;
+  border-bottom: 1px solid #333;
+  padding .5em 1em;
 `;
 
-const ArticleListItem = ({ article }) =>
+const Authors = styled.p`
+  text-transform: none;
+`;
+
+const ArticleListItem = ({ title, authors, extended}) =>
   <Container>
-    <Link to={article.url}>
-      {article.title}
+    <Link to={'#'}>
+      {title}
     </Link>
-    {article.authors}
-    {article.body}
+    <Authors>{authors}</Authors>
   </Container>;
 
 export default ArticleListItem;

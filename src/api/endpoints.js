@@ -43,7 +43,7 @@ export const interpret = query => {
  * orderby    (optional) string | Name of an attribute that is used for sorting the entities. Optionally, ascending/descending can be specified. The format is: name:asc or name:desc.
  * attributes (optional) string | A comma delimited list that specifies the attribute values that are included in the response. Attribute names are case-sensitive.
 * */
-export const evaluate = (expr, attributes = ['Id', 'Ti']) => {
+export const evaluate = (expr, attributes = ['Id', 'Ti', 'CC', 'E', 'AA.AuN', 'JJN', 'W']) => {
   // [?query][&complete][&count][&offset][&timeout][&model]'
   const attrStr = attributes.reduce((a, b) => `${a},${b}`, 'Id');
 
