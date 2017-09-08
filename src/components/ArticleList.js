@@ -23,6 +23,12 @@ const toHumanReadableList = function(array, join, finalJoin) {
 	arr = arr.map((author) => titleCase(author));
 	last = titleCase(last);
 
+	// if there is only one author, return that
+	if (!arr.length) {
+		return last;
+	}
+
+	// turn the authors into a list
     return arr.join(join) + finalJoin + last;    
 };
 
@@ -66,6 +72,8 @@ const ArticleList = ({ results }) =>
 	    	authors={toHumanReadableList(article.AA.map(obj => obj.AuN))}
 	    	extended={JSON.parse(article.E)}
 	    	abstract={reconstructAbstract(JSON.parse(article.E))}
+	    	journal={article.J ? titleCase(article.J.JN) : 'No Journal Found'}
+	    	citations={article.CC}
 	    	{...article} 
     	/>
 	)}

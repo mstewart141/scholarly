@@ -9,7 +9,7 @@ const Container = styled.div`
 
 const Title = styled.p`
   margin-top: 0;
-  margin-bottom: .3em;
+  margin-bottom: .1em;
   font-size: 1.2em;
 `;
 
@@ -23,13 +23,22 @@ const Abstract = styled.p`
   line-height: 1em;
 `;
 
-const ArticleListItem = ({ title, authors, abstract, extended}) =>
+const Journal = styled.span`
+  font-size: .75em;
+  margin: 0;
+`;
+
+const Citations = Journal;
+
+const ArticleListItem = ({ title, authors, abstract, journal, citations}) =>
   <Container>
     <Link to={'#'}>
       <Title>{title}</Title>
     </Link>
     <Authors>{authors}</Authors>
     <Abstract>{abstract.slice(0, 250) + '...'}</Abstract>
+    <Journal>{journal} • {citations + ' citations'}</Journal> 
+    <Citations></Citations>
   </Container>;
 
 export default ArticleListItem;
