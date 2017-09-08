@@ -18,7 +18,7 @@ const rootReducer = (state = defaultState, action) => {
     case EVALUATE_SUCCESS:
       return { ...state, results: action.results };
     case INTERPRET_SUCCESS:
-      return { ...state, results: action.interpretations };
+      return { ...state, interpretations: action.interpretations };
     //   // should also change the inFlight stuff eventually
     //   return [...state];
     // case FETCH_FROM_API_AFTER_REQUEST:

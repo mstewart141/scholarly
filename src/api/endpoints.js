@@ -14,7 +14,7 @@ const makeCall = uri => {
   return fetch(request)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
+      console.log('fetch returning  ', res);
       return res;
     });
 };

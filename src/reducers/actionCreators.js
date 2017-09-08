@@ -18,9 +18,10 @@ export const lol = () => ({ type: LOL });
 
 export const getInterpretations = userQuery => dispatch =>
   interpret(userQuery)
-    .then(({ interpetations }) => interpetations)
+    .then(({ interpretations }) => interpretations)
     .then(interpretations => {
       dispatch(interpretSuccess(interpretations));
+
       console.log('dfssdfdf', new Promise((res, rej) => res(interpretations)));
       return new Promise((res, rej) => res(interpretations)); // value
     })
@@ -34,8 +35,8 @@ export const resolveEvaluateQuery = (
     .then(results => dispatch(evaluateSuccess(results)))
     .catch(error => console.log(error)); // dispatch evaluateFailure
 
-export const interpretAndResolve = userQuery =>
-  getInterpretations(userQuery)
+export const interpretAndResolve = userQuery => dispatch =>
+  getInterpretations(userQuery)(dispatch)
     .then(interpretations => interpretations[0].rules[0].output.value)
-    .then(expr => resolveEvaluateQuery(expr))
+    .then(expr => resolveEvaluateQuery(expr)(dispatch))
     .catch(error => console.log(error));
