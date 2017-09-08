@@ -9,7 +9,7 @@ const Container = styled.div`
 
 const ArticlePreview = ({ article }) =>
   <Container>
-    {article}
+    <p>{article && article.Ti}</p>
   </Container>;
 
 export default ArticlePreview;

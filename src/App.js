@@ -10,7 +10,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   max-width: 80%;
   margin: auto;
-  padding-top: 10em;
+  padding-top: 4em;
 `;
 
 const Subcontainer = styled.div`
@@ -23,8 +23,8 @@ class App extends Component {
       <Container>
         <Search executeQuery={this.props.interpretAndResolve}/>
         <Subcontainer>
-          <ArticleList results={this.props.results}/>
-          <ArticlePreview />
+          <ArticleList results={this.props.results} expandArticle={this.props.expandArticleByIndex}/>
+          <ArticlePreview article={this.props.results[this.props.focus]}/>
         </Subcontainer>
       </Container>
     );
@@ -33,6 +33,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   results: state.results,
+  focus: state.focus,
 });
 
 const mapDispatchToProps = dispatch =>

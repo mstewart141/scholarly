@@ -4,7 +4,8 @@ import {
   // GRAB_RESOLVED_API_RESP_PAYLOAD,
   LOL,
   EVALUATE_SUCCESS,
-  INTERPRET_SUCCESS
+  INTERPRET_SUCCESS,
+  EXPAND_ARTICLE,
 } from './actionCreators';
 
 const defaultState = { cat: 7, results: [], interpretations: [] };
@@ -19,6 +20,8 @@ const rootReducer = (state = defaultState, action) => {
       return { ...state, results: action.results };
     case INTERPRET_SUCCESS:
       return { ...state, interpretations: action.interpretations };
+    case EXPAND_ARTICLE:
+      return { ...state, focus: action.index };
     //   // should also change the inFlight stuff eventually
     //   return [...state];
     // case FETCH_FROM_API_AFTER_REQUEST:

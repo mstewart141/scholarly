@@ -63,7 +63,7 @@ const reconstructAbstract = function(extended) {
 	return result.join(' ');
 }
 
-const ArticleList = ({ results }) =>
+const ArticleList = ({ results, expandArticle }) =>
   <Container>
     {results.map(article =>
     	<ArticleListItem 
@@ -74,6 +74,7 @@ const ArticleList = ({ results }) =>
 	    	abstract={reconstructAbstract(JSON.parse(article.E))}
 	    	journal={article.J ? titleCase(article.J.JN) : 'No Journal Found'}
 	    	citations={article.CC}
+			expandArticle={expandArticle}
 	    	{...article} 
     	/>
 	)}
