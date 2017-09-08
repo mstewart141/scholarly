@@ -33,7 +33,15 @@ const titleCase = function(sentence) {
 	).join(' ');
 }
 
+// based on an articles extended data, reconstructs the abstract of
+// that article by uninverting the inverted index
+// e.g. {'IndexLength': 3, 'InvertedIndex' {'hello': [0, 2], 'world': [1]}}
+// e.g. => 'hello world hello'
 const reconstructAbstract = function(extended) {
+	if (!extended || !extended.IA) {
+		return 'No abstract found';
+	}
+
 	const length = extended.IA.IndexLength;
 	const wordsByPosition = extended.IA.InvertedIndex;
 

@@ -8,7 +8,8 @@ const Container = styled.div`
 `;
 
 const Title = styled.p`
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: .3em;
   font-size: 1.2em;
 `;
 
