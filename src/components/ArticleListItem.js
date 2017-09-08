@@ -7,16 +7,28 @@ const Container = styled.div`
   padding .5em 1em;
 `;
 
-const Authors = styled.p`
-  text-transform: none;
+const Title = styled.p`
+  margin: 0;
+  font-size: 1.2em;
 `;
 
-const ArticleListItem = ({ title, authors, extended}) =>
+const Authors = styled.p`
+  margin: 0;
+  font-size: .75em;
+`;
+
+const Abstract = styled.p`
+  font-size: .9em;
+  line-height: 1em;
+`;
+
+const ArticleListItem = ({ title, authors, abstract, extended}) =>
   <Container>
     <Link to={'#'}>
-      {title}
+      <Title>{title}</Title>
     </Link>
     <Authors>{authors}</Authors>
+    <Abstract>{abstract.slice(0, 250) + '...'}</Abstract>
   </Container>;
 
 export default ArticleListItem;

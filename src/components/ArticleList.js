@@ -5,6 +5,7 @@ import ArticleListItem from './ArticleListItem';
 const Container = styled.div`
   flex-grow: 1;
   border: 1px solid black;
+  border-bottom: 0;
   min-height: 30em;
   overflow: hidden;
   max-width: 50%;
@@ -32,6 +33,22 @@ const titleCase = function(sentence) {
 	).join(' ');
 }
 
+const reconstructAbstract = function(extended) {
+	const length = extended.IA.IndexLength;
+	const wordsByPosition = extended.IA.InvertedIndex;
+
+	var result = new Array(length);
+
+	for (let word in wordsByPosition) {
+		const positions = wordsByPosition[word];
+		positions.forEach(function(pos) {
+			result[pos] = word;
+		});
+	}
+
+	return result.join(' ');
+}
+
 const ArticleList = ({ results }) =>
   <Container>
     {results.map(article =>
@@ -40,6 +57,7 @@ const ArticleList = ({ results }) =>
 	    	title={titleCase(article.Ti)}
 	    	authors={toHumanReadableList(article.AA.map(obj => obj.AuN))}
 	    	extended={JSON.parse(article.E)}
+	    	abstract={reconstructAbstract(JSON.parse(article.E))}
 	    	{...article} 
     	/>
 	)}
