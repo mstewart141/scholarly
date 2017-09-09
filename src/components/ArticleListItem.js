@@ -31,7 +31,14 @@ const Journal = styled.span`
 const Citations = Journal;
 
 const ArticleListItem = ({ title, authors, abstract, journal, citations, expandArticle}) =>
-  <Container onClick={() => expandArticle(0)}>
+  <Container 
+    onClick={() => expandArticle({
+      title: title,
+      authors: authors,
+      abstract: abstract,
+      journal: journal,
+      citations: citations,
+    })}>
     <Link to={'#'}>
       <Title>{title}</Title>
     </Link>

@@ -21,7 +21,7 @@ const rootReducer = (state = defaultState, action) => {
     case INTERPRET_SUCCESS:
       return { ...state, interpretations: action.interpretations };
     case EXPAND_ARTICLE:
-      return { ...state, focus: action.index };
+      return { ...state, focus: action.article };
     //   // should also change the inFlight stuff eventually
     //   return [...state];
     // case FETCH_FROM_API_AFTER_REQUEST:

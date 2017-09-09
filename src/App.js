@@ -24,7 +24,7 @@ class App extends Component {
         <Search executeQuery={this.props.interpretAndResolve}/>
         <Subcontainer>
           <ArticleList results={this.props.results} expandArticle={this.props.expandArticleByIndex}/>
-          <ArticlePreview article={this.props.results[this.props.focus]}/>
+          <ArticlePreview {...this.props.focus}/>
         </Subcontainer>
       </Container>
     );

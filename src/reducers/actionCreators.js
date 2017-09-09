@@ -15,9 +15,9 @@ const evaluateSuccess = results => ({
   results
 });
 
-const expandArticle = index => ({
+const expandArticle = article => ({
   type: EXPAND_ARTICLE,
-  index,
+  article,
 })
 
 export const lol = () => ({ type: LOL });
@@ -47,5 +47,5 @@ export const interpretAndResolve = userQuery => dispatch =>
     .then(expr => resolveEvaluateQuery(expr)(dispatch))
     .catch(error => console.log(error));
 
-export const expandArticleByIndex = index => dispatch =>
-  dispatch(expandArticle(index));
+export const expandArticleByIndex = article => dispatch =>
+  dispatch(expandArticle(article));

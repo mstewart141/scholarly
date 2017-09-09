@@ -4,12 +4,13 @@ import styled from 'styled-components';
 const Container = styled.div`
   flex-grow: 1;
   border: 1px solid black;
-  height: 50em;
+  border-left: 0;
+  max-width: 50%;
 `;
 
-const ArticlePreview = ({ article }) =>
+const ArticlePreview = ({ title, author, abstract, journal, citations }) =>
   <Container>
-    <p>{article && article.Ti}</p>
+    <p>{abstract}</p>
   </Container>;
 
 export default ArticlePreview;
