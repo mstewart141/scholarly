@@ -9,43 +9,54 @@ const Container = styled.div`
 
 const Title = styled.p`
   margin-top: 0;
-  margin-bottom: .1em;
+  margin-bottom: 0.1em;
   font-size: 1.2em;
 `;
 
 const Authors = styled.p`
   margin: 0;
-  font-size: .75em;
+  font-size: 0.75em;
 `;
 
 const Abstract = styled.p`
-  font-size: .9em;
+  font-size: 0.9em;
   line-height: 1em;
 `;
 
 const Journal = styled.span`
-  font-size: .75em;
+  font-size: 0.75em;
   margin: 0;
 `;
 
 const Citations = Journal;
 
-const ArticleListItem = ({ title, authors, abstract, journal, citations, expandArticle}) =>
-  <Container 
-    onClick={() => expandArticle({
-      title: title,
-      authors: authors,
-      abstract: abstract,
-      journal: journal,
-      citations: citations,
-    })}>
+const ArticleListItem = ({
+  title,
+  authors,
+  abstract,
+  journal,
+  citations,
+  expandArticle
+}) => (
+  <Container
+    onClick={() =>
+      expandArticle({
+        title,
+        authors,
+        abstract,
+        journal,
+        citations
+      })}>
     <Link to={'#'}>
       <Title>{title}</Title>
     </Link>
     <Authors>{authors}</Authors>
-    <Abstract>{abstract.slice(0, 250) + '...'}</Abstract>
-    <Journal>{journal} • {citations + ' citations'}</Journal> 
-    <Citations></Citations>
-  </Container>;
+    <Abstract>{`${abstract.slice(0, 250)}...`}</Abstract>
+    <Journal>
+      {journal} • {`${citations} citations`}
+    </Journal>
+    <Citations />
+  </Container>
+);
 
 export default ArticleListItem;

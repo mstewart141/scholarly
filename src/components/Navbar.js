@@ -12,14 +12,14 @@ const Container = styled.ul`
   width: 100%;
 `;
 
-const StyledMenuItem = styled.li`padding: .75em 1em;`;
+const StyledMenuItem = styled.li`padding: 0.75em 1em;`;
 
 const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
 `;
 
-const Navbar = ({ articles }) =>
+const Navbar = ({ articles }) => (
   <Container>
     <StyledMenuItem>
       <StyledLink to="/">Home</StyledLink>
@@ -27,6 +27,7 @@ const Navbar = ({ articles }) =>
     <StyledMenuItem>
       <StyledLink to="/about">About</StyledLink>
     </StyledMenuItem>
-  </Container>;
+  </Container>
+);
 
 export default Navbar;

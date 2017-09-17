@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../reducers/actionCreators';
-import * as endpoints from '../api/endpoints';
 
 const Temp = ({
   lol,
@@ -23,8 +22,6 @@ const Temp = ({
     <button onClick={() => interpretAndResolve('xgboost')}>BOTH</button>
   </div>
 );
-
-// () => endpoints.evaluate("Composite(AA.AuN=='jaime teevan')")
 
 const mapStateToProps = null;
 const mapDispatchToProps = dispatch =>

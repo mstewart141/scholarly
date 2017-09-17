@@ -8,9 +8,10 @@ const Container = styled.div`
   max-width: 50%;
 `;
 
-const ArticlePreview = ({ title, author, abstract, journal, citations }) =>
+const ArticlePreview = ({ title, author, abstract, journal, citations }) => (
   <Container>
     <p>{abstract}</p>
-  </Container>;
+  </Container>
+);
 
 export default ArticlePreview;
