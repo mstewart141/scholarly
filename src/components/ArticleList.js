@@ -11,74 +11,62 @@ const Container = styled.div`
   max-width: 50%;
 `;
 
+// takes a sentence and title cases all words in it
+const titleCase = sentence =>
+  sentence
+    .split(' ')
+    .map(([h, ...tl]) => h.toUpperCase() + tl.join(''))
+    .join(' ');
+
 // format authors into a human readable list
 // e.g. ([frog, cog, dog log]) => 'Frog, Cog, and Dog Log'
-const toHumanReadableList = function(array, join, finalJoin) {
-    var arr = array.slice(0);
-    var last = arr.pop();
+const toHumanReadableList = (array, join = ', ', finalJoin = ' and ') => {
+  const arr = array.slice(0).map(titleCase);
+  const last = arr.pop();
 
-    join = join || ', ';
-    finalJoin = finalJoin || ' and ';
-
-	arr = arr.map((author) => titleCase(author));
-	last = titleCase(last);
-
-	// if there is only one author, return that
-	if (!arr.length) {
-		return last;
-	}
-
-	// turn the authors into a list
-    return arr.join(join) + finalJoin + last;    
+  // turn the authors into a list
+  return arr.length < 1 ? last : arr.join(join) + finalJoin + last;
 };
-
-// takes a sentence and title cases all words in it
-const titleCase = function(sentence) {
-	return sentence.split(' ').map(([h, ...tl]) =>
-		(h.toUpperCase() + tl.join(''))
-	).join(' ');
-}
 
 // based on an articles extended data, reconstructs the abstract of
 // that article by uninverting the inverted index
 // e.g. {'IndexLength': 3, 'InvertedIndex' {'hello': [0, 2], 'world': [1]}}
 // e.g. => 'hello world hello'
-const reconstructAbstract = function(extended) {
-	if (!extended || !extended.IA) {
-		return 'No abstract found';
-	}
+const reconstructAbstract = extended => {
+  if (!extended || !extended.IA) {
+    return 'No abstract found';
+  }
+  const { IA: { IndexLength, InvertedIndex: wordsByPosition } } = extended;
 
-	const length = extended.IA.IndexLength;
-	const wordsByPosition = extended.IA.InvertedIndex;
+  const result = new Array(IndexLength);
 
-	var result = new Array(length);
+  for (const word in wordsByPosition) {
+    const positions = wordsByPosition[word];
+    positions.forEach(pos => {
+      result[pos] = word;
+    });
+  }
 
-	for (let word in wordsByPosition) {
-		const positions = wordsByPosition[word];
-		positions.forEach(function(pos) {
-			result[pos] = word;
-		});
-	}
+  return result.join(' ');
+};
 
-	return result.join(' ');
-}
-
-const ArticleList = ({ results, expandArticle }) =>
+const ArticleList = ({ results, expandArticle }) => (
   <Container>
-    {results.map(article =>
-    	<ArticleListItem 
-	    	key={article.Id}
-	    	title={titleCase(article.Ti)}
-	    	authors={toHumanReadableList(article.AA.map(obj => obj.AuN))}
-	    	extended={JSON.parse(article.E)}
-	    	abstract={reconstructAbstract(JSON.parse(article.E))}
-	    	journal={article.J ? titleCase(article.J.JN) : 'No Journal Found'}
-	    	citations={article.CC}
-			expandArticle={expandArticle}
-	    	{...article} 
-    	/>
-	)}
-  </Container>;
+    {results.map(article => (
+      <ArticleListItem
+        key={article.Id}
+        title={titleCase(article.Ti)}
+        authors={toHumanReadableList(article.AA.map(obj => obj.AuN))}
+        extended={JSON.parse(article.E)}
+        abstract={reconstructAbstract(JSON.parse(article.E))}
+        journal={article.J ? titleCase(article.J.JN) : 'No Journal Found'}
+        citations={article.CC}
+        expandArticle={expandArticle}
+        {...article}
+      />
+    ))}
+  </Container>
+);
 
 ArticleList.defaultProps = { results: [] };
 

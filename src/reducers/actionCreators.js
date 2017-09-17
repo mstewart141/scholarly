@@ -15,10 +15,10 @@ const evaluateSuccess = results => ({
   results
 });
 
-const expandArticle = article => ({
+export const expandArticleByIndex = article => ({
   type: EXPAND_ARTICLE,
-  article,
-})
+  article
+});
 
 export const lol = () => ({ type: LOL });
 
@@ -27,11 +27,9 @@ export const getInterpretations = userQuery => dispatch =>
     .then(({ interpretations }) => interpretations)
     .then(interpretations => {
       dispatch(interpretSuccess(interpretations));
-
-      console.log('dfssdfdf', new Promise((res, rej) => res(interpretations)));
-      return new Promise((res, rej) => res(interpretations)); // value
+      return new Promise(res => res(interpretations));
     })
-    .catch(error => console.log(error)); // dispatch interpretFailure
+    .catch(error => console.log(error)); // TODO: dispatch interpretFailure
 
 export const resolveEvaluateQuery = (
   expr = "Composite(AA.AuN=='jaime teevan')"
@@ -39,13 +37,10 @@ export const resolveEvaluateQuery = (
   evaluate(expr)
     .then(({ entities }) => entities)
     .then(results => dispatch(evaluateSuccess(results)))
-    .catch(error => console.log(error)); // dispatch evaluateFailure
+    .catch(error => console.log(error)); // TODO: dispatch evaluateFailure
 
 export const interpretAndResolve = userQuery => dispatch =>
   getInterpretations(userQuery)(dispatch)
     .then(interpretations => interpretations[0].rules[0].output.value)
     .then(expr => resolveEvaluateQuery(expr)(dispatch))
     .catch(error => console.log(error));
-
-export const expandArticleByIndex = article => dispatch =>
-  dispatch(expandArticle(article));

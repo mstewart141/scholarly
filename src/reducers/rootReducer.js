@@ -5,7 +5,7 @@ import {
   LOL,
   EVALUATE_SUCCESS,
   INTERPRET_SUCCESS,
-  EXPAND_ARTICLE,
+  EXPAND_ARTICLE
 } from './actionCreators';
 
 const defaultState = { cat: 7, results: [], interpretations: [] };
