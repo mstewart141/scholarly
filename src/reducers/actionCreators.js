@@ -1,4 +1,5 @@
 import { evaluate, interpret } from '../api/endpoints';
+import { processResults } from '../api/utils';
 
 export const LOL = 'LOL';
 export const EVALUATE_SUCCESS = 'EVALUATE_SUCCESS';
@@ -36,7 +37,7 @@ export const resolveEvaluateQuery = (
 ) => dispatch =>
   evaluate(expr)
     .then(({ entities }) => entities)
-    .then(results => dispatch(evaluateSuccess(results)))
+    .then(results => dispatch(evaluateSuccess(processResults(results))))
     .catch(error => console.log(error)); // TODO: dispatch evaluateFailure
 
 export const interpretAndResolve = userQuery => dispatch =>
