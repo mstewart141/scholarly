@@ -13,12 +13,18 @@ const Input = styled.input`
 class Search extends Component {
   constructor(props) {
     super(props);
+
+    this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({query: event.target.value});
   }
 
   onSubmit(event) {
     event.preventDefault();
-    this.props.executeQuery(this.search.value);
+    this.props.executeQuery(this.state.query);
   }
 
   render() {
@@ -26,9 +32,7 @@ class Search extends Component {
       <form onSubmit={this.onSubmit}>
         <Input
           placeholder="Search"
-          innerRef={search => {
-            this.search = search;
-          }}
+          onChange={this.handleChange}
         />
       </form>
     );
