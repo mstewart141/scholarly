@@ -6,11 +6,13 @@ const Container = styled.div`
   border: 1px solid black;
   border-left: 0;
   max-width: 50%;
+  padding: .5em 1em;
+  font-size: .9em;
 `;
 
 const ArticlePreview = ({ title, author, abstract, journal, citations }) => (
   <Container>
-    <p>{abstract}</p>
+    {abstract}
   </Container>
 );
 
