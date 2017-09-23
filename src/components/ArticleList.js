@@ -11,13 +11,17 @@ const Container = styled.div`
   max-width: 50%;
 `;
 
-const ArticleList = ({ results, expandArticle }) => (
+const ArticleList = ({ results, expandArticle, focus }) =>
   <Container>
-    {results.map(article => (
-      <ArticleListItem {...article} expandArticle={expandArticle} />
-    ))}
-  </Container>
-);
+    {results.map((article, index) =>
+      <ArticleListItem
+        {...article}
+        expandArticle={expandArticle}
+        index={index}
+        active={focus === index}
+      />
+    )}
+  </Container>;
 
 ArticleList.defaultProps = { results: [] };
 

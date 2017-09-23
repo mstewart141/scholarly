@@ -16,9 +16,9 @@ const evaluateSuccess = results => ({
   results
 });
 
-export const expandArticleByIndex = article => ({
+export const expandArticleByIndex = index => ({
   type: EXPAND_ARTICLE,
-  article
+  index
 });
 
 export const lol = () => ({ type: LOL });

@@ -24,8 +24,9 @@ class App extends Component {
           <ArticleList
             results={this.props.results}
             expandArticle={this.props.expandArticleByIndex}
+            focus={this.props.focus}
           />
-          <ArticlePreview {...this.props.focus} />
+          <ArticlePreview {...this.props.results[this.props.focus]} />
         </Subcontainer>
       </Container>
     );

@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   border-bottom: 1px solid #333;
-  padding .5em 1em;
+  padding: .5em 1em;
+  background: ${props => (props.active ? '#ffef96' : 'white')};
 
   &:hover {
     background: #ffef96;
@@ -40,27 +41,24 @@ const ArticleListItem = ({
   abstract,
   journal,
   citations,
-  expandArticle
-}) => (
-  <Container
-    onClick={() =>
-      expandArticle({
-        title,
-        authors,
-        abstract,
-        journal,
-        citations
-      })}>
+  expandArticle,
+  index,
+  active
+}) =>
+  <Container onClick={() => expandArticle(index)} active={active}>
     <Link to={'#'}>
-      <Title>{title}</Title>
+      <Title>
+        {title}
+      </Title>
     </Link>
-    <Authors>{authors}</Authors>
+    <Authors>
+      {authors}
+    </Authors>
     <Abstract>{`${abstract.slice(0, 250)}...`}</Abstract>
     <Journal>
       {journal} • {`${citations} citations`}
     </Journal>
     <Citations />
-  </Container>
-);
+  </Container>;
 
 export default ArticleListItem;

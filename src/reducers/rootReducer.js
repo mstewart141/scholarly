@@ -18,7 +18,7 @@ const rootReducer = (state = defaultState, action) => {
     case INTERPRET_SUCCESS:
       return { ...state, interpretations: action.interpretations };
     case EXPAND_ARTICLE:
-      return { ...state, focus: action.article };
+      return { ...state, focus: action.index };
     //   // should also change the inFlight stuff eventually
     //   return [...state];
     default:
