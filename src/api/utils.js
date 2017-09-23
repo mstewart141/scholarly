@@ -25,14 +25,14 @@ const reconstructAbstract = extended => {
   }
   const { IA: { IndexLength, InvertedIndex: wordsByPosition } } = extended;
 
-  const result = new Array(IndexLength);
-
-  for (const word in wordsByPosition) {
-    const positions = wordsByPosition[word];
+  const result = Object.entries(
+    wordsByPosition
+  ).reduce((accum, [word, positions]) => {
     positions.forEach(pos => {
-      result[pos] = word;
+      accum[pos] = word;
     });
-  }
+    return accum;
+  }, new Array(IndexLength));
 
   return result.join(' ');
 };

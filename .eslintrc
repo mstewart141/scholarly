@@ -1,27 +1,24 @@
 {
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react"
-  ],
-  "plugins": [
-    "react",
-    "prettier",
-  ],
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": ["error", {
-      "singleQuote": true,
-      "trailingComma": "none",
-      "semi": true,
-      "jsxBracketSameLine": true,
-      "parser": "babylon"
-    }],
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "none",
+        "semi": true,
+        "jsxBracketSameLine": true,
+        "parser": "babylon"
+      }
+    ],
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
     "import/no-unresolved": 0,
     "import/extensions": 0,
     "comma-dangle": ["error", "only-multiline"],
     "no-console": 0,
+    "no-param-reassign": 1,
     "react/prop-types": 1
   },
   "parserOptions": {
