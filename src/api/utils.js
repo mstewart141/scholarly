@@ -41,20 +41,30 @@ export const lol = 7;
 export const processResults = results =>
   results.map(
     (
-      { CC: citations, Id: key, Ti: title, E: extendedArticle, J, AA, Y: year },
+      {
+        AA,
+        CC: citations,
+        E: extendedArticle,
+        Id: key,
+        J,
+        logprob,
+        Ti: title,
+        Y: year
+      },
       idx
     ) => {
       const extended = JSON.parse(extendedArticle);
       return {
-        citations,
-        key,
-        idx,
-        extended,
-        year,
         abstract: reconstructAbstract(extended),
-        title: titleCase(title),
+        authors: toHumanReadableList(AA.map(({ AuN }) => AuN)),
+        citations,
+        extended,
+        idx,
         journal: J && J.JN ? titleCase(J.JN) : 'No Journal Found',
-        authors: toHumanReadableList(AA.map(({ AuN }) => AuN))
+        key,
+        logprob,
+        title: titleCase(title),
+        year
       };
     }
   );

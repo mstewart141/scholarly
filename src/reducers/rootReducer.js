@@ -15,7 +15,9 @@ const rootReducer = (state = defaultState, action) => {
     case EVALUATE_SUCCESS:
       return {
         ...state,
-        results: action.results.concat(state.results),
+        results: action.results
+          .concat(state.results)
+          .sort((a, b) => b.logprob - a.logprob),
         focus: undefined
       };
     case EXPAND_ARTICLE:
