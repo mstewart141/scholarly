@@ -19,7 +19,7 @@ class Search extends Component {
   }
 
   handleChange(event) {
-    this.setState({query: event.target.value});
+    this.setState({ query: event.target.value });
   }
 
   onSubmit(event) {
@@ -30,10 +30,7 @@ class Search extends Component {
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <Input
-          placeholder="Search"
-          onChange={this.handleChange}
-        />
+        <Input placeholder="Search" onChange={this.handleChange} />
       </form>
     );
   }

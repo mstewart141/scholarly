@@ -8,9 +8,11 @@ import ArticlePreview from './components/ArticlePreview';
 import Search from './components/Search';
 
 const Container = styled.div`
-  max-width: 80%;
+  width: 80%;
+  max-width: 960px;
   margin: auto;
   padding-top: 4em;
+  max-height: 100vh;
 `;
 
 const Subcontainer = styled.div`display: flex;`;

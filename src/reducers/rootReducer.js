@@ -14,7 +14,7 @@ const rootReducer = (state = defaultState, action) => {
       console.log('yup lololol switched');
       return { ...state, cat: 5 };
     case EVALUATE_SUCCESS:
-      return { ...state, results: action.results };
+      return { ...state, results: action.results, focus: undefined };
     case INTERPRET_SUCCESS:
       return { ...state, interpretations: action.interpretations };
     case EXPAND_ARTICLE:

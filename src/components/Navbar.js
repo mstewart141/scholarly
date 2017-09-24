@@ -8,7 +8,7 @@ const Container = styled.ul`
   position: fixed;
   display: flex;
   margin: 0;
-  padding: 0 10%;
+  padding: 0 15%;
   width: 100%;
 `;
 
@@ -19,7 +19,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-const Navbar = ({ articles }) => (
+const Navbar = ({ articles }) =>
   <Container>
     <StyledMenuItem>
       <StyledLink to="/">Home</StyledLink>
@@ -27,7 +27,6 @@ const Navbar = ({ articles }) => (
     <StyledMenuItem>
       <StyledLink to="/about">About</StyledLink>
     </StyledMenuItem>
-  </Container>
-);
+  </Container>;
 
 export default Navbar;

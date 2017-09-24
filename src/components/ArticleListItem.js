@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   border-bottom: 1px solid #333;
-  padding: .5em 1em;
+  padding: 1.25em 1.75em;
   background: ${props => (props.active ? '#ffef96' : 'white')};
 
   &:hover {
