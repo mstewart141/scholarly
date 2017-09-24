@@ -19,7 +19,9 @@ class Search extends Component {
   }
 
   handleChange(event) {
-    this.setState({ query: event.target.value });
+    const q = event.target.value;
+    this.setState({ query: q });
+    this.props.getInterpretations(q, true);
   }
 
   onSubmit(event) {
@@ -28,9 +30,25 @@ class Search extends Component {
   }
 
   render() {
+    const parser = new DOMParser();
+    const renderedCompletions = this.props.interpretations.map(
+      interpretation => {
+        let q = parser
+          .parseFromString(interpretation.parse, 'text/xml')
+          .getElementsByTagName('attr')[0].childNodes[0].nodeValue;
+
+        return (
+          <p>
+            {q}
+          </p>
+        );
+      }
+    );
+
     return (
       <form onSubmit={this.onSubmit}>
         <Input placeholder="Search" onChange={this.handleChange} />
+        {renderedCompletions}
       </form>
     );
   }

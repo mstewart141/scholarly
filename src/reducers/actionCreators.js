@@ -23,8 +23,11 @@ export const expandArticleByIndex = index => ({
 
 export const lol = () => ({ type: LOL });
 
-export const getInterpretations = userQuery => dispatch =>
-  interpret(userQuery)
+export const getInterpretations = (
+  userQuery,
+  autocomplete = false
+) => dispatch =>
+  interpret(userQuery, autocomplete)
     .then(({ interpretations }) => interpretations)
     .then(interpretations => {
       dispatch(interpretSuccess(interpretations));

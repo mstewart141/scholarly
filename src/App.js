@@ -21,7 +21,11 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <Search executeQuery={this.props.interpretAndResolve} />
+        <Search
+          executeQuery={this.props.interpretAndResolve}
+          getInterpretations={this.props.getInterpretations}
+          interpretations={this.props.interpretations}
+        />
         <Subcontainer>
           <ArticleList
             results={this.props.results}
@@ -35,7 +39,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ results, focus }) => ({ results, focus });
+const mapStateToProps = ({ results, focus, interpretations }) => ({
+  results,
+  focus,
+  interpretations
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(actionCreators, dispatch);

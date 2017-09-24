@@ -25,9 +25,10 @@ const makeCall = uri => {
  * timeout  (optional) number  | Timeout in milliseconds. Only interpretations found before the timeout has elapsed are returned.
  * model    (optional) string  | Name of the model that you wish to query. Currently, the value defaults to "latest".
 * */
-export const interpret = query => {
+export const interpret = (query, autocomplete) => {
   // [?query][&complete][&count][&offset][&timeout][&model]'
-  const endpoint = 'interpret?query=';
+  const shouldComplete = autocomplete ? 1 : 0;
+  const endpoint = 'interpret?complete=' + shouldComplete + '&query=';
   const uri = `${BASE_URL + endpoint + query}`;
 
   return makeCall(uri);
