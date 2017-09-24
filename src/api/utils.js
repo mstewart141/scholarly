@@ -40,13 +40,17 @@ const reconstructAbstract = extended => {
 export const lol = 7;
 export const processResults = results =>
   results.map(
-    ({ CC: citations, Id: key, Ti: title, E: extendedArticle, J, AA }, idx) => {
+    (
+      { CC: citations, Id: key, Ti: title, E: extendedArticle, J, AA, Y: year },
+      idx
+    ) => {
       const extended = JSON.parse(extendedArticle);
       return {
         citations,
         key,
         idx,
         extended,
+        year,
         abstract: reconstructAbstract(extended),
         title: titleCase(title),
         journal: J ? titleCase(J.JN) : 'No Journal Found',

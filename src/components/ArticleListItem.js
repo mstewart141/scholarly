@@ -43,7 +43,8 @@ const ArticleListItem = ({
   citations,
   expandArticle,
   index,
-  active
+  active,
+  year
 }) =>
   <Container onClick={() => expandArticle(index)} active={active}>
     <Link to={'#'}>
@@ -56,7 +57,7 @@ const ArticleListItem = ({
     </Authors>
     <Abstract>{`${abstract.slice(0, 250)}...`}</Abstract>
     <Journal>
-      {journal} • {`${citations} citations`}
+      {journal} ({year}) • {`${citations} citations`}
     </Journal>
     <Citations />
   </Container>;
