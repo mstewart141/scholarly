@@ -53,7 +53,7 @@ export const processResults = results =>
         year,
         abstract: reconstructAbstract(extended),
         title: titleCase(title),
-        journal: J ? titleCase(J.JN) : 'No Journal Found',
+        journal: J && J.JN ? titleCase(J.JN) : 'No Journal Found',
         authors: toHumanReadableList(AA.map(({ AuN }) => AuN))
       };
     }

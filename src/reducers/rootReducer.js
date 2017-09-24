@@ -5,7 +5,7 @@ import {
   EXPAND_ARTICLE
 } from './actionCreators';
 
-const defaultState = { cat: 7, results: [], interpretations: [] };
+const defaultState = { results: [], interpretations: [], focus: undefined };
 
 const rootReducer = (state = defaultState, action) => {
   // console.log('REDUCER FIRING');
@@ -14,7 +14,11 @@ const rootReducer = (state = defaultState, action) => {
       console.log('yup lololol switched');
       return { ...state, cat: 5 };
     case EVALUATE_SUCCESS:
-      return { ...state, results: action.results, focus: undefined };
+      return {
+        ...state,
+        results: action.results.concat(state.results),
+        focus: undefined
+      };
     case INTERPRET_SUCCESS:
       return { ...state, interpretations: action.interpretations };
     case EXPAND_ARTICLE:
