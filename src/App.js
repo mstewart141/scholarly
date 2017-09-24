@@ -23,6 +23,7 @@ class App extends Component {
       <Container>
         <Search
           executeQuery={this.props.interpretAndResolve}
+          clearArticleResults={this.props.clearArticleResults}
           getInterpretations={this.props.getInterpretations}
           interpretations={this.props.interpretations}
         />

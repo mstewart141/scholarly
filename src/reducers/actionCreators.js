@@ -1,19 +1,24 @@
 import { evaluate, interpret } from '../api/endpoints';
 import { processResults } from '../api/utils';
 
-export const LOL = 'LOL';
+export const CLEAR_ARTICLE_RESULTS = 'CLEAR_ARTICLE_RESULTS';
 export const EVALUATE_SUCCESS = 'EVALUATE_SUCCESS';
-export const INTERPRET_SUCCESS = 'INTERPRET_SUCCESS';
 export const EXPAND_ARTICLE = 'EXPAND_ARTICLE';
+export const INTERPRET_SUCCESS = 'INTERPRET_SUCCESS';
+
+const evaluateSuccess = results => ({
+  type: EVALUATE_SUCCESS,
+  results
+});
 
 const interpretSuccess = interpretations => ({
   type: INTERPRET_SUCCESS,
   interpretations
 });
 
-const evaluateSuccess = results => ({
-  type: EVALUATE_SUCCESS,
-  results
+export const clearArticleResults = () => ({
+  type: CLEAR_ARTICLE_RESULTS,
+  results: []
 });
 
 export const expandArticleByIndex = index => ({
@@ -33,7 +38,7 @@ export const getInterpretations = (
     })
     .catch(error => console.log(error)); // TODO: dispatch interpretFailure
 
-export const resolveEvaluateQuery = (
+const resolveEvaluateQuery = (
   expr = "Composite(AA.AuN=='jaime teevan')"
 ) => dispatch =>
   evaluate(expr)

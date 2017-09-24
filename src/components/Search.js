@@ -18,30 +18,27 @@ class Search extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.clearArticleResults();
+    this.props.executeQuery(this.state.query);
+  }
+
   handleChange(event) {
     const q = event.target.value;
     this.setState({ query: q });
     this.props.getInterpretations(q, true);
   }
 
-  onSubmit(event) {
-    event.preventDefault();
-    this.props.executeQuery(this.state.query);
-  }
-
   render() {
     const parser = new DOMParser();
     const renderedCompletions = this.props.interpretations.map(
       interpretation => {
-        let q = parser
+        const q = parser
           .parseFromString(interpretation.parse, 'text/xml')
           .getElementsByTagName('attr')[0].childNodes[0].nodeValue;
 
-        return (
-          <p>
-            {q}
-          </p>
-        );
+        return <p>{q}</p>;
       }
     );
 

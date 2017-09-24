@@ -1,8 +1,8 @@
 import {
-  LOL,
+  CLEAR_ARTICLE_RESULTS,
   EVALUATE_SUCCESS,
-  INTERPRET_SUCCESS,
-  EXPAND_ARTICLE
+  EXPAND_ARTICLE,
+  INTERPRET_SUCCESS
 } from './actionCreators';
 
 const defaultState = { results: [], interpretations: [], focus: undefined };
@@ -10,19 +10,18 @@ const defaultState = { results: [], interpretations: [], focus: undefined };
 const rootReducer = (state = defaultState, action) => {
   // console.log('REDUCER FIRING');
   switch (action.type) {
-    case LOL:
-      console.log('yup lololol switched');
-      return { ...state, cat: 5 };
+    case CLEAR_ARTICLE_RESULTS:
+      return { ...state, results: action.results };
     case EVALUATE_SUCCESS:
       return {
         ...state,
         results: action.results.concat(state.results),
         focus: undefined
       };
-    case INTERPRET_SUCCESS:
-      return { ...state, interpretations: action.interpretations };
     case EXPAND_ARTICLE:
       return { ...state, focus: action.index };
+    case INTERPRET_SUCCESS:
+      return { ...state, interpretations: action.interpretations };
     //   // should also change the inFlight stuff eventually
     //   return [...state];
     default:
