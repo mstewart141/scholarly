@@ -21,8 +21,6 @@ export const expandArticleByIndex = index => ({
   index
 });
 
-export const lol = () => ({ type: LOL });
-
 export const getInterpretations = (
   userQuery,
   autocomplete = false
@@ -45,6 +43,10 @@ export const resolveEvaluateQuery = (
 
 export const interpretAndResolve = userQuery => dispatch =>
   getInterpretations(userQuery)(dispatch)
-    .then(interpretations => interpretations[0].rules[0].output.value)
-    .then(expr => resolveEvaluateQuery(expr)(dispatch))
+    .then(interps => {
+      const rawResults = interps.length >= 4 ? interps.slice(0, 4) : interps;
+      const exprArr = rawResults.map(({ rules }) => rules[0].output.value);
+      return exprArr;
+    })
+    .then(exprArr => exprArr.map(expr => resolveEvaluateQuery(expr)(dispatch)))
     .catch(error => console.log(error));

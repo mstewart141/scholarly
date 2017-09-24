@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../reducers/actionCreators';
 
 const Temp = ({
-  lol,
   getInterpretations,
   resolveEvaluateQuery,
   interpretAndResolve
@@ -16,7 +15,6 @@ const Temp = ({
     <div> hello </div>
     <div> hello </div>
     <div> hello </div>
-    <button onClick={lol}>hello</button>
     <button onClick={() => getInterpretations('xgboost')}>interprete</button>
     <button onClick={() => resolveEvaluateQuery()}>evaluate</button>
     <button onClick={() => interpretAndResolve('xgboost')}>BOTH</button>
