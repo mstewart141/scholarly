@@ -7,8 +7,8 @@ const Container = styled.ul`
   list-style-type: none;
   position: fixed;
   display: flex;
-  margin: 0;
-  padding: 0 15%;
+  margin: 0 auto;
+  padding: 0 10%;
   width: 100%;
 `;
 

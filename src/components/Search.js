@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+const SearchContainer = styled.div`
+  margin-bottom: 1em;
+  z-index: 1;
+  max-height: 0;
+`;
+
 const Input = styled.input`
   padding: 0.5em 1em;
   font-size: 1.2em;
   width: 100%;
   border-radius: 0.5em;
   border: 1px grey solid;
-  margin-bottom: 1em;
+`;
+
+const SearchResult = styled.div`
+  padding: .25em 1em;
+  z-index: 2;
+  &:hover {
+    background: lavender;
+  }
 `;
 
 class Search extends Component {
@@ -38,14 +51,20 @@ class Search extends Component {
           .parseFromString(interpretation.parse, 'text/xml')
           .getElementsByTagName('attr')[0].childNodes[0].nodeValue;
 
-        return <p>{q}</p>;
+        return (
+          <SearchResult style={{ margin: 0 }}>
+            {q}
+          </SearchResult>
+        );
       }
     );
 
     return (
       <form onSubmit={this.onSubmit}>
         <Input placeholder="Search" onChange={this.handleChange} />
-        {renderedCompletions}
+        <SearchContainer>
+          {renderedCompletions}
+        </SearchContainer>
       </form>
     );
   }
