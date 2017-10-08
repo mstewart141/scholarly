@@ -22,9 +22,10 @@ class App extends Component {
     return (
       <Container>
         <Search
-          executeQuery={this.props.interpretAndResolve}
           clearArticleResults={this.props.clearArticleResults}
           getInterpretations={this.props.getInterpretations}
+          resolveEvaluateQuery={this.props.resolveEvaluateQuery}
+          executeQuery={this.props.interpretAndResolve}
           interpretations={this.props.interpretations}
         />
         <Subcontainer>

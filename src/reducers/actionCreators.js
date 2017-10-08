@@ -38,9 +38,7 @@ export const getInterpretations = (
     })
     .catch(error => console.log(error)); // TODO: dispatch interpretFailure
 
-const resolveEvaluateQuery = (
-  expr = "Composite(AA.AuN=='jaime teevan')"
-) => dispatch =>
+export const resolveEvaluateQuery = expr => dispatch =>
   evaluate(expr)
     .then(({ entities }) => entities)
     .then(results => dispatch(evaluateSuccess(processResults(results))))

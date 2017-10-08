@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const SearchContainer = styled.div`
+import SearchResult from './SearchResult';
+
+const SearchContainer = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  background: white;
+  border: 1px solid black;
+  border-radius: .2em;
   margin-bottom: 1em;
-  z-index: 1;
-  max-height: 0;
 `;
 
 const Input = styled.input`
@@ -13,14 +19,6 @@ const Input = styled.input`
   width: 100%;
   border-radius: 0.5em;
   border: 1px grey solid;
-`;
-
-const SearchResult = styled.div`
-  padding: .25em 1em;
-  z-index: 2;
-  &:hover {
-    background: lavender;
-  }
 `;
 
 class Search extends Component {
@@ -52,19 +50,25 @@ class Search extends Component {
           .getElementsByTagName('attr')[0].childNodes[0].nodeValue;
 
         return (
-          <SearchResult style={{ margin: 0 }}>
-            {q}
-          </SearchResult>
+          <SearchResult
+            key={interpretation.parse}
+            text={q}
+            expr={interpretation.rules[0].output.value}
+            resolveEvaluateQuery={this.props.resolveEvaluateQuery}
+            clearArticleResults={this.props.clearArticleResults}
+          />
         );
       }
     );
 
     return (
       <form onSubmit={this.onSubmit}>
-        <Input placeholder="Search" onChange={this.handleChange} />
-        <SearchContainer>
-          {renderedCompletions}
-        </SearchContainer>
+        <div>
+          <Input placeholder="Search" onChange={this.handleChange} />
+          <SearchContainer>
+            {renderedCompletions}
+          </SearchContainer>
+        </div>
       </form>
     );
   }
