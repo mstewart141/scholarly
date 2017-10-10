@@ -5,6 +5,7 @@ export const CLEAR_ARTICLE_RESULTS = 'CLEAR_ARTICLE_RESULTS';
 export const EVALUATE_SUCCESS = 'EVALUATE_SUCCESS';
 export const EXPAND_ARTICLE = 'EXPAND_ARTICLE';
 export const INTERPRET_SUCCESS = 'INTERPRET_SUCCESS';
+export const SHOW_COMPLETIONS = 'SHOW_COMPLETIONS';
 
 const evaluateSuccess = results => ({
   type: EVALUATE_SUCCESS,
@@ -19,6 +20,11 @@ const interpretSuccess = interpretations => ({
 export const clearArticleResults = () => ({
   type: CLEAR_ARTICLE_RESULTS,
   results: []
+});
+
+export const showCompletions = value => ({
+  type: SHOW_COMPLETIONS,
+  value
 });
 
 export const expandArticleByIndex = index => ({

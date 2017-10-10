@@ -32,34 +32,37 @@ class Search extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.clearArticleResults();
+    this.props.showCompletions(false);
     this.props.executeQuery(this.state.query);
   }
 
   handleChange(event) {
     const q = event.target.value;
     this.setState({ query: q });
+    this.props.showCompletions(true);
     this.props.getInterpretations(q, true);
   }
 
   render() {
     const parser = new DOMParser();
-    const renderedCompletions = this.props.interpretations.map(
-      interpretation => {
-        const q = parser
-          .parseFromString(interpretation.parse, 'text/xml')
-          .getElementsByTagName('attr')[0].childNodes[0].nodeValue;
+    const renderedCompletions = this.props.completionsShown
+      ? this.props.interpretations.map(interpretation => {
+          const q = parser
+            .parseFromString(interpretation.parse, 'text/xml')
+            .getElementsByTagName('attr')[0].childNodes[0].nodeValue;
 
-        return (
-          <SearchResult
-            key={interpretation.parse}
-            text={q}
-            expr={interpretation.rules[0].output.value}
-            resolveEvaluateQuery={this.props.resolveEvaluateQuery}
-            clearArticleResults={this.props.clearArticleResults}
-          />
-        );
-      }
-    );
+          return (
+            <SearchResult
+              key={interpretation.parse}
+              text={q}
+              expr={interpretation.rules[0].output.value}
+              resolveEvaluateQuery={this.props.resolveEvaluateQuery}
+              clearArticleResults={this.props.clearArticleResults}
+              showCompletions={this.props.showCompletions}
+            />
+          );
+        })
+      : [];
 
     return (
       <form onSubmit={this.onSubmit}>

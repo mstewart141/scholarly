@@ -10,9 +10,16 @@ const Container = styled.li`
   }
 `;
 
-const handleClick = (text, expr, clearArticleResults, resolveEvaluateQuery) => {
+const handleClick = (
+  text,
+  expr,
+  clearArticleResults,
+  showCompletions,
+  resolveEvaluateQuery
+) => {
   // todo: update search bar and autocomplete results
   clearArticleResults();
+  showCompletions(false);
   resolveEvaluateQuery(expr);
 };
 
@@ -20,11 +27,18 @@ const SearchResult = ({
   text,
   expr,
   clearArticleResults,
+  showCompletions,
   resolveEvaluateQuery
 }) =>
   <Container
     onClick={() =>
-      handleClick(text, expr, clearArticleResults, resolveEvaluateQuery)}>
+      handleClick(
+        text,
+        expr,
+        clearArticleResults,
+        showCompletions,
+        resolveEvaluateQuery
+      )}>
     {text}
   </Container>;
 

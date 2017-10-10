@@ -23,10 +23,12 @@ class App extends Component {
       <Container>
         <Search
           clearArticleResults={this.props.clearArticleResults}
+          showCompletions={this.props.showCompletions}
           getInterpretations={this.props.getInterpretations}
           resolveEvaluateQuery={this.props.resolveEvaluateQuery}
           executeQuery={this.props.interpretAndResolve}
           interpretations={this.props.interpretations}
+          completionsShown={this.props.completionsShown}
         />
         <Subcontainer>
           <ArticleList
@@ -41,10 +43,16 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ results, focus, interpretations }) => ({
+const mapStateToProps = ({
   results,
   focus,
-  interpretations
+  interpretations,
+  showCompletions
+}) => ({
+  results,
+  focus,
+  interpretations,
+  completionsShown: showCompletions
 });
 
 const mapDispatchToProps = dispatch =>
