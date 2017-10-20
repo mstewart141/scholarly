@@ -10,7 +10,7 @@ const defaultState = {
   results: [],
   interpretations: [],
   focus: undefined,
-  showCompletions: true
+  showCompletions: false
 };
 
 const rootReducer = (state = defaultState, action) => {

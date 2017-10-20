@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import SearchResult from './SearchResult';
 
-const SearchContainer = styled.ul`
+const SearchResultsContainer = styled.ul`
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -11,6 +11,7 @@ const SearchContainer = styled.ul`
   border: 1px solid black;
   border-radius: .2em;
   margin-bottom: 1em;
+  display: ${({ shown }) => (shown ? 'block' : 'none')};
 `;
 
 const Input = styled.input`
@@ -43,34 +44,48 @@ class Search extends Component {
     this.props.getInterpretations(q, true);
   }
 
+  handleBlur = event => {
+    // todo: hack to keep links clickable
+    setTimeout(() => this.props.showCompletions(false), 200);
+  };
+
+  handleFocus = event => {
+    this.props.showCompletions(true);
+  };
+
   render() {
     const parser = new DOMParser();
-    const renderedCompletions = this.props.completionsShown
-      ? this.props.interpretations.map(interpretation => {
-          const q = parser
-            .parseFromString(interpretation.parse, 'text/xml')
-            .getElementsByTagName('attr')[0].childNodes[0].nodeValue;
+    const renderedCompletions = this.props.interpretations.map(
+      interpretation => {
+        const q = parser
+          .parseFromString(interpretation.parse, 'text/xml')
+          .getElementsByTagName('attr')[0].childNodes[0].nodeValue;
 
-          return (
-            <SearchResult
-              key={interpretation.parse}
-              text={q}
-              expr={interpretation.rules[0].output.value}
-              resolveEvaluateQuery={this.props.resolveEvaluateQuery}
-              clearArticleResults={this.props.clearArticleResults}
-              showCompletions={this.props.showCompletions}
-            />
-          );
-        })
-      : [];
+        return (
+          <SearchResult
+            key={interpretation.parse}
+            text={q}
+            expr={interpretation.rules[0].output.value}
+            resolveEvaluateQuery={this.props.resolveEvaluateQuery}
+            clearArticleResults={this.props.clearArticleResults}
+            showCompletions={this.props.showCompletions}
+          />
+        );
+      }
+    );
 
     return (
       <form onSubmit={this.onSubmit}>
         <div>
-          <Input placeholder="Search" onChange={this.handleChange} />
-          <SearchContainer>
+          <Input
+            placeholder="Search"
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+          />
+          <SearchResultsContainer shown={this.props.completionsShown}>
             {renderedCompletions}
-          </SearchContainer>
+          </SearchResultsContainer>
         </div>
       </form>
     );
